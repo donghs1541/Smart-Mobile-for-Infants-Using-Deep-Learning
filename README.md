@@ -8,6 +8,8 @@
     카메라
   안드로이드(앱)
   서버(컴퓨터)
+  
+![first_icon](https://user-images.githubusercontent.com/68945145/116649473-47e2f700-a9ba-11eb-94b0-ddfc351e02aa.png)
 
 
 
