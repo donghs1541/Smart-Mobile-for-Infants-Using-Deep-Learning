@@ -25,3 +25,8 @@ v2.0
 라즈베리파이에 yolov5를 이용하여 (pytorch필요 1.7.0임 numpy 등등 필요) // https://github.com/ultralytics/yolov5(yolov5링크)
 사람과 얼굴 두가지의 사람형태를 학습하여 적용함
 
+v2.1
+라즈베리파이 client 수정
+
+v2.2 
+안드로이드 앱 기능 추가 
