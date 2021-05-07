@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+<item
+    android:id="@+id/action_airplane"
+    android:enabled="true"
+    android:icon="@drawable/ic_baseline_airplanemode_active_24"
+    android:title="비행기"></item>
+
+    <item
+        android:id="@+id/action_activity"
+        android:enabled="true"
+        android:icon="@drawable/ic_baseline_attribution_24"
+        android:title="운동"></item>
+
+    <item
+        android:id="@+id/action_music"
+        android:enabled="true"
+        android:icon="@drawable/ic_baseline_headset_24"
+        android:title="음악"></item>
+
+    <item
+        android:id="@+id/action_call"
+        android:enabled="true"
+        android:icon="@drawable/ic_baseline_local_phone_24"
+        android:title="전화"></item>
+
+    <item
+        android:id="@+id/action_sports"
+        android:enabled="true"
+        android:icon="@drawable/ic_baseline_sports_handball_24"
+        android:title="핸드볼"></item>
+</menu>
