@@ -61,12 +61,12 @@ public class MainActivity extends Activity {
         editTextAddress = (EditText)findViewById(R.id.ip);
         editTextPort = (EditText)findViewById(R.id.port);
         editMsg = (EditText)findViewById(R.id.msg);
-        buttonSend = (Button)findViewById(R.id.send);
-        buttonClear = (Button)findViewById(R.id.clear);
+        buttonSend = (Button)findViewById(R.id.send); //보내는 버튼
+        buttonClear = (Button)findViewById(R.id.clear);  //초기화 버튼
         textResponse = (TextView)findViewById(R.id.response);
 
         buttonSend.setOnClickListener(new OnClickListener() {
-            public void onClick(View v) {
+            public void onClick(View v) {   //메시지 보내는 이벤트
                 Thread sendworker = new Thread(){
                     public void run(){
 
