@@ -7,30 +7,6 @@
     android:layout_height="match_parent"
     tools:context=".MainActivity">
 
-    <EditText
-        android:id="@+id/ip"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="32dp"
-        android:layout_marginLeft="32dp"
-        android:layout_marginTop="32dp"
-        android:ems="10"
-        android:hint="raspberry_pi_ip"
-        android:inputType="textPersonName"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-    <EditText
-        android:id="@+id/port"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="32dp"
-        android:layout_marginLeft="32dp"
-        android:layout_marginTop="24dp"
-        android:ems="10"
-        android:hint="port"
-        android:inputType="textPersonName"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/ip" />
 
     <EditText
         android:id="@+id/msg"
@@ -40,8 +16,7 @@
         android:ems="10"
         android:hint="message"
         android:inputType="textPersonName"
-        app:layout_constraintStart_toStartOf="@+id/port"
-        app:layout_constraintTop_toBottomOf="@+id/port" />
+        tools:ignore="MissingConstraints" />
     <Button
         android:id="@+id/send"
         android:layout_width="0dp"

@@ -15,6 +15,7 @@ import java.net.*;
 import java.net.UnknownHostException;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Handler;
@@ -58,15 +59,18 @@ public class MainActivity extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        editTextAddress = (EditText)findViewById(R.id.ip);
-        editTextPort = (EditText)findViewById(R.id.port);
+
+        /*
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_main);
+*/
         editMsg = (EditText)findViewById(R.id.msg);
-        buttonSend = (Button)findViewById(R.id.send); //보내는 버튼
-        buttonClear = (Button)findViewById(R.id.clear);  //초기화 버튼
+        buttonSend = (Button)findViewById(R.id.send);
+        buttonClear = (Button)findViewById(R.id.clear);
         textResponse = (TextView)findViewById(R.id.response);
 
         buttonSend.setOnClickListener(new OnClickListener() {
-            public void onClick(View v) {   //메시지 보내는 이벤트
+            public void onClick(View v) {
                 Thread sendworker = new Thread(){
                     public void run(){
 
