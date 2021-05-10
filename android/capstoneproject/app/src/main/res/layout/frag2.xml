@@ -7,5 +7,19 @@
     <WebView
         android:id="@+id/webview_login"
         android:layout_width="match_parent"
-        android:layout_height="match_parent" />
+        android:layout_height="566dp" />
+
+    <Button
+        android:id="@+id/cctvon"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+
+    <Button
+        android:id="@+id/cctvoff"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+
+
+
 </LinearLayout>
+

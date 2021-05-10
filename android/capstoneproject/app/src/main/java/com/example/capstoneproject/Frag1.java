@@ -38,24 +38,7 @@ public class Frag1 extends Fragment {
 
     view = inflater.inflate(R.layout.frag1,container,false);
 
-        editMsg = (EditText)view.findViewById(R.id.msg);
-        buttonSend = (Button)view.findViewById(R.id.send);
-        textResponse = (TextView)view.findViewById(R.id.response);
 
-        buttonSend.setOnClickListener(new View.OnClickListener() {
-            public void onClick(View v) {
-                Thread sendworker = new Thread(){
-                    public void run(){
-
-                        out = new PrintWriter(new BufferedWriter(new OutputStreamWriter(outputStream)), true);  //out 객체 초기화
-
-                        Message = editMsg.getText().toString();
-                        out.write(Message);
-                        out.flush();
-                    }
-                };sendworker.start();
-            }
-        });
 
     return view;
 

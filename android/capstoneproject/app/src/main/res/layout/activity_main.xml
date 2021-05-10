@@ -44,6 +44,16 @@
         app:layout_constraintStart_toStartOf="@+id/clear"
         app:layout_constraintTop_toBottomOf="@+id/clear" />
 
+    <Button
+        android:id="@+id/noti"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="24dp"
+        android:text="알림"
+        app:layout_constraintStart_toStartOf="@+id/response"
+        app:layout_constraintTop_toBottomOf="@+id/response" />
+    />
+
     <com.google.android.material.bottomnavigation.BottomNavigationView
         android:id="@+id/bottomNani"
         android:layout_width="match_parent"
@@ -56,8 +66,8 @@
 
     <FrameLayout
         android:id="@+id/main_frame"
-        android:layout_width="408dp"
-        android:layout_height="409dp"
+        android:layout_width="411dp"
+        android:layout_height="346dp"
         app:layout_constraintBottom_toTopOf="@+id/bottomNani"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"

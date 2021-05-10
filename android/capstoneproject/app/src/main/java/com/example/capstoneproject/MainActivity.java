@@ -2,6 +2,8 @@ package com.example.capstoneproject;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.NotificationCompat;
+import androidx.core.app.NotificationManagerCompat;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
@@ -18,8 +20,13 @@ import java.net.*;
 import java.net.UnknownHostException;
 
 import android.app.Activity;
+import android.app.Notification;
+import android.app.NotificationChannel;
+import android.app.NotificationManager;
+import android.app.PendingIntent;
 import android.content.Intent;
 import android.os.AsyncTask;
+import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
@@ -40,10 +47,11 @@ import java.io.OutputStreamWriter;
 import java.io.PrintWriter;
 import java.net.Socket;
 
-public class MainActivity extends AppCompatActivity {
-    EditText input1;
-    Button receive;
-    TextView output;
+public class MainActivity extends AppCompatActivity{
+
+    public final String CHANNEL_ID = "my_notification_channel";
+    public final int NOTIFICATION_ID = 101;
+
     private BottomNavigationView bottomNavigationView;
     private FragmentManager fm;
     private FragmentTransaction ft;
@@ -72,6 +80,9 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+
+
+
         editMsg = (EditText)findViewById(R.id.msg);
         buttonSend = (Button)findViewById(R.id.send);
         textResponse = (TextView)findViewById(R.id.response);
@@ -86,6 +97,7 @@ public class MainActivity extends AppCompatActivity {
                         Message = editMsg.getText().toString();
                         out.write(Message);
                         out.flush();
+
                     }
                 };sendworker.start();
             }
@@ -98,6 +110,9 @@ public class MainActivity extends AppCompatActivity {
                 textResponse.setText(txtRecevie);
             }
         };
+
+
+
 
 
 
@@ -148,6 +163,7 @@ public class MainActivity extends AppCompatActivity {
                     out.flush();
 
                     while (true){
+
                         System.out.println("asdasdaasdasdasdsadasdasdsadsadasdsadsasdasd");
                         int size = inputStream.read(buffer);
                         txtRecevie = new String(buffer,0,size,"UTF-8");
@@ -165,7 +181,51 @@ public class MainActivity extends AppCompatActivity {
 
             }};worker.start();
 
+
+
+
+        Button btn_noti = findViewById(R.id.noti);
+        btn_noti.setOnClickListener(new OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                displayNotification(v);
+            }
+        });
+
     }
+//알림설정
+    public void displayNotification(View v){
+        createNotificationChaanel();
+
+        //알림설정
+        NotificationCompat.Builder builder = new NotificationCompat.Builder(this,CHANNEL_ID);
+        builder.setSmallIcon((R.drawable.alram_icon));
+        builder.setContentTitle("낳음당한년");
+        builder.setPriority(NotificationManagerCompat.IMPORTANCE_DEFAULT);
+        builder.setAutoCancel(true);
+        NotificationManagerCompat notificationManagerCompat = NotificationManagerCompat.from(this);
+        notificationManagerCompat.notify(NOTIFICATION_ID,builder.build());
+
+    }
+    //채널설정
+private void createNotificationChaanel(){
+        //오레오부터 알림을 채널에 등록해야함
+        if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.O){
+            CharSequence name = "채널이름";
+            String description = "채널설명";
+            int importance = NotificationManager.IMPORTANCE_DEFAULT;
+            NotificationChannel notificationChannel = new NotificationChannel(CHANNEL_ID,name,importance);
+            notificationChannel.setDescription(description);
+
+            //알림매니저생성
+            NotificationManager notificationManager = (NotificationManager)getSystemService(NOTIFICATION_SERVICE);
+
+            //알림매니저에 채널등록
+            notificationManager.createNotificationChannel(notificationChannel);
+
+    }
+}
+
 
 //프래그먼트 교체가 일어나는 실행문
     private void setFrag(int n){
@@ -177,22 +237,18 @@ public class MainActivity extends AppCompatActivity {
                 ft.replace(R.id.main_frame,frag1);
                 ft.commit();
                 break;
-
             case 1:
                 ft.replace(R.id.main_frame,frag2);
                 ft.commit();
                 break;
-
             case 2:
                 ft.replace(R.id.main_frame,frag3);
                 ft.commit();
                 break;
-
             case 3:
                 ft.replace(R.id.main_frame,frag4);
                 ft.commit();
                 break;
-
         }
 
 
