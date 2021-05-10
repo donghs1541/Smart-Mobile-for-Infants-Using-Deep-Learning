@@ -32,7 +32,7 @@ public class Frag2 extends Fragment {
         mWebView.setWebViewClient(new WebViewClient());
         mWebSettings = mWebView.getSettings();
         mWebSettings.setJavaScriptEnabled(true);
-        mWebView.loadUrl("http://www.naver.com");
+        mWebView.loadUrl("http://www.naver.com"); // 주소를 바꿔야함()
 
         return view;
 
