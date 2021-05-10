@@ -51,7 +51,6 @@ public class MainActivity extends AppCompatActivity {
     private Frag2 frag2;
     private Frag3 frag3;
     private Frag4 frag4;
-    private Frag5 frag5;
 
 
     String IpAddress = "113.198.234.39";
@@ -94,9 +93,7 @@ public class MainActivity extends AppCompatActivity {
                     case R.id.action_call:
                         setFrag(3);
                         break;
-                    case R.id.action_sports:
-                        setFrag(4);
-                        break;
+
                 }
 
             }
@@ -106,7 +103,6 @@ public class MainActivity extends AppCompatActivity {
         frag2 = new Frag2();
         frag3 = new Frag3();
         frag4 = new Frag4();
-        frag5 = new Frag5();
 
         setFrag(0); //첫 프래그먼트 화면 지정
 
@@ -211,10 +207,6 @@ public class MainActivity extends AppCompatActivity {
                 ft.commit();
                 break;
 
-            case 4:
-                ft.replace(R.id.main_frame,frag5);
-                ft.commit();
-                break;
         }
 
 
