@@ -26,18 +26,27 @@ public class Frag1 extends Fragment {
     TextView textResponse;
     EditText editMsg;
     Button buttonSend;
-    String Message = "android";
-    PrintWriter out;
-    OutputStream outputStream;
+    String SenSorValue;
 
     private View view;
 
+    public String getSenSorValue(){ //센서값 보내주기
+
+
+        return SenSorValue;
+    }
+    public void setSenSorValue(String SenSorValue){  //센서값 받기
+        textResponse.setText(SenSorValue);
+    }
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
 
     view = inflater.inflate(R.layout.frag1,container,false);
 
+        editMsg = (EditText)view.findViewById(R.id.msg);
+        buttonSend = (Button)view.findViewById(R.id.send);
+        textResponse = (TextView)view.findViewById(R.id.response);
 
 
     return view;

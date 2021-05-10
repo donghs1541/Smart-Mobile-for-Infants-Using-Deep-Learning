@@ -59,6 +59,7 @@ public class MainActivity extends AppCompatActivity{
     private Frag2 frag2;
     private Frag3 frag3;
     private Frag4 frag4;
+    private String SendSignal = "000"; // 서버에 시그널 보내는 변수
 
 
     String Message = "android";
@@ -69,9 +70,6 @@ public class MainActivity extends AppCompatActivity{
      ByteArrayOutputStream byteArrayOutputStream;
      PrintWriter out;
     InputStream inputStream;
-    TextView textResponse;
-    EditText editMsg;
-    Button buttonSend;
     BufferedReader reader ;
 
 
@@ -79,42 +77,6 @@ public class MainActivity extends AppCompatActivity{
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
-
-
-
-        editMsg = (EditText)findViewById(R.id.msg);
-        buttonSend = (Button)findViewById(R.id.send);
-        textResponse = (TextView)findViewById(R.id.response);
-
-        buttonSend.setOnClickListener(new OnClickListener() {
-            public void onClick(View v) {
-                Thread sendworker = new Thread(){
-                    public void run(){
-
-                        out = new PrintWriter(new BufferedWriter(new OutputStreamWriter(outputStream)), true);  //out 객체 초기화
-
-                        Message = editMsg.getText().toString();
-                        out.write(Message);
-                        out.flush();
-
-                    }
-                };sendworker.start();
-            }
-        });
-
-        final Handler handler = new Handler()
-        {
-            public void handleMessage(android.os.Message msg)
-            {
-                textResponse.setText(txtRecevie);
-            }
-        };
-
-
-
-
-
 
         bottomNavigationView = findViewById(R.id.bottomNani);
         bottomNavigationView.setOnNavigationItemReselectedListener(new BottomNavigationView.OnNavigationItemReselectedListener() {
@@ -162,16 +124,31 @@ public class MainActivity extends AppCompatActivity{
                     out.write(Message);
                     out.flush();
 
+                    frag1.setSenSorValue("ㅁㄴ어나미오ㅓㅁ나ㅣ오ㅓㄴㅁㅇ");
                     while (true){
 
-                        System.out.println("asdasdaasdasdasdsadasdasdsadsadasdsadsasdasd");
-                        int size = inputStream.read(buffer);
-                        txtRecevie = new String(buffer,0,size,"UTF-8");
-                        System.out.println("asdasdasdasd"+txtRecevie);
+                        out.write(SendSignal);
+                        out.flush();
 
-                        Message message = handler.obtainMessage();
-                        handler.sendMessage(message);
+                        if (SendSignal =="000") { //센서값 받기 
 
+                            System.out.println("asdasdaasdasdasdsadasdasdsadsadasdsadsasdasd");
+                            int size = inputStream.read(buffer);
+                            txtRecevie = new String(buffer, 0, size, "UTF-8");
+                            System.out.println("asdasdasdasd" + txtRecevie);
+                            frag1.setSenSorValue(txtRecevie);
+                            try{
+                                Thread.sleep(3000); // 3초지연
+                            }
+                            catch (Exception e){
+                                e.printStackTrace(); //오류 출력
+                            }
+
+
+                        }
+                        else if (SendSignal=="111"){ //CCTV일때
+                            System.out.println("기다리기");
+                        }
 
                     }
                 }
@@ -182,16 +159,6 @@ public class MainActivity extends AppCompatActivity{
             }};worker.start();
 
 
-
-
-        Button btn_noti = findViewById(R.id.noti);
-        btn_noti.setOnClickListener(new OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                displayNotification(v);
-            }
-        });
-
     }
 //알림설정
     public void displayNotification(View v){
@@ -200,7 +167,7 @@ public class MainActivity extends AppCompatActivity{
         //알림설정
         NotificationCompat.Builder builder = new NotificationCompat.Builder(this,CHANNEL_ID);
         builder.setSmallIcon((R.drawable.alram_icon));
-        builder.setContentTitle("낳음당한년");
+        builder.setContentTitle("우리 애가 아파요");
         builder.setPriority(NotificationManagerCompat.IMPORTANCE_DEFAULT);
         builder.setAutoCancel(true);
         NotificationManagerCompat notificationManagerCompat = NotificationManagerCompat.from(this);
