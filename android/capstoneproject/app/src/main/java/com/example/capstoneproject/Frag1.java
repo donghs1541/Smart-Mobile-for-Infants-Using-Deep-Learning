@@ -4,12 +4,31 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.EditText;
+import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
+import java.io.BufferedWriter;
+import java.io.OutputStream;
+import java.io.OutputStreamWriter;
+import java.io.PrintWriter;
+
+
+
+
+
 public class Frag1 extends Fragment {
+
+    TextView textResponse;
+    EditText editMsg;
+    Button buttonSend;
+    String Message = "android";
+    PrintWriter out;
+    OutputStream outputStream;
 
     private View view;
 
@@ -19,7 +38,24 @@ public class Frag1 extends Fragment {
 
     view = inflater.inflate(R.layout.frag1,container,false);
 
+        editMsg = (EditText)view.findViewById(R.id.msg);
+        buttonSend = (Button)view.findViewById(R.id.send);
+        textResponse = (TextView)view.findViewById(R.id.response);
 
+        buttonSend.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                Thread sendworker = new Thread(){
+                    public void run(){
+
+                        out = new PrintWriter(new BufferedWriter(new OutputStreamWriter(outputStream)), true);  //out 객체 초기화
+
+                        Message = editMsg.getText().toString();
+                        out.write(Message);
+                        out.flush();
+                    }
+                };sendworker.start();
+            }
+        });
 
     return view;
 

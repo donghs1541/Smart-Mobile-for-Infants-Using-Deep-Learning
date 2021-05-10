@@ -53,20 +53,17 @@ public class MainActivity extends AppCompatActivity {
     private Frag4 frag4;
 
 
-    String IpAddress = "113.198.234.39";
-    int Port = 55000;
     String Message = "android";
     String txtRecevie = "";
      byte[] buffer = new byte[1024]; //읽어오는 버퍼 크기
-     int bytesRead;  //
      Socket client;
      OutputStream  outputStream;
      ByteArrayOutputStream byteArrayOutputStream;
      PrintWriter out;
     InputStream inputStream;
     TextView textResponse;
-    EditText editTextAddress, editTextPort, editMsg;
-    Button buttonSend, buttonClear;
+    EditText editMsg;
+    Button buttonSend;
     BufferedReader reader ;
 
 
@@ -74,6 +71,35 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        editMsg = (EditText)findViewById(R.id.msg);
+        buttonSend = (Button)findViewById(R.id.send);
+        textResponse = (TextView)findViewById(R.id.response);
+
+        buttonSend.setOnClickListener(new OnClickListener() {
+            public void onClick(View v) {
+                Thread sendworker = new Thread(){
+                    public void run(){
+
+                        out = new PrintWriter(new BufferedWriter(new OutputStreamWriter(outputStream)), true);  //out 객체 초기화
+
+                        Message = editMsg.getText().toString();
+                        out.write(Message);
+                        out.flush();
+                    }
+                };sendworker.start();
+            }
+        });
+
+        final Handler handler = new Handler()
+        {
+            public void handleMessage(android.os.Message msg)
+            {
+                textResponse.setText(txtRecevie);
+            }
+        };
+
+
 
         bottomNavigationView = findViewById(R.id.bottomNani);
         bottomNavigationView.setOnNavigationItemReselectedListener(new BottomNavigationView.OnNavigationItemReselectedListener() {
@@ -106,42 +132,9 @@ public class MainActivity extends AppCompatActivity {
 
         setFrag(0); //첫 프래그먼트 화면 지정
 
-
-
-        editMsg = (EditText)findViewById(R.id.msg);
-        buttonSend = (Button)findViewById(R.id.send);
-        buttonClear = (Button)findViewById(R.id.clear);
-        textResponse = (TextView)findViewById(R.id.response);
-
-        buttonSend.setOnClickListener(new OnClickListener() {
-            public void onClick(View v) {
-                Thread sendworker = new Thread(){
-                    public void run(){
-
-                        out = new PrintWriter(new BufferedWriter(new OutputStreamWriter(outputStream)), true);  //out 객체 초기화
-
-                        Message = editMsg.getText().toString();
-                        out.write(Message);
-                        out.flush();
-                    }
-                };sendworker.start();
-            }
-        });
-        final Handler handler = new Handler()
-        {
-            public void handleMessage(android.os.Message msg)
-            {
-                textResponse.setText(txtRecevie);
-            }
-        };
-
-
         Thread worker = new Thread(){
             @Override
             public void run(){
-
-
-
                 try {
                     Message ="android";
                     client = new Socket("113.198.234.39", 55000);
@@ -171,13 +164,6 @@ public class MainActivity extends AppCompatActivity {
                 }
 
             }};worker.start();
-
-
-
-
-
-
-
 
     }
 
