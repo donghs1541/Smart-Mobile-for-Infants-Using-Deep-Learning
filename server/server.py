@@ -5,7 +5,7 @@ import time
 import numpy
 import cv2
 
-host = "113.198.234.49"
+host = "113.198.234.39"
 port = 55000
 user_list = {}
 notice_flag = 0

@@ -49,8 +49,6 @@ import java.net.Socket;
 
 public class MainActivity extends AppCompatActivity{
 
-    public final String CHANNEL_ID = "my_notification_channel";
-    public final int NOTIFICATION_ID = 101;
 
     private BottomNavigationView bottomNavigationView;
     private FragmentManager fm;
@@ -160,38 +158,6 @@ public class MainActivity extends AppCompatActivity{
 
 
     }
-//알림설정
-    public void displayNotification(View v){
-        createNotificationChaanel();
-
-        //알림설정
-        NotificationCompat.Builder builder = new NotificationCompat.Builder(this,CHANNEL_ID);
-        builder.setSmallIcon((R.drawable.alram_icon));
-        builder.setContentTitle("우리 애가 아파요");
-        builder.setPriority(NotificationManagerCompat.IMPORTANCE_DEFAULT);
-        builder.setAutoCancel(true);
-        NotificationManagerCompat notificationManagerCompat = NotificationManagerCompat.from(this);
-        notificationManagerCompat.notify(NOTIFICATION_ID,builder.build());
-
-    }
-    //채널설정
-private void createNotificationChaanel(){
-        //오레오부터 알림을 채널에 등록해야함
-        if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.O){
-            CharSequence name = "채널이름";
-            String description = "채널설명";
-            int importance = NotificationManager.IMPORTANCE_DEFAULT;
-            NotificationChannel notificationChannel = new NotificationChannel(CHANNEL_ID,name,importance);
-            notificationChannel.setDescription(description);
-
-            //알림매니저생성
-            NotificationManager notificationManager = (NotificationManager)getSystemService(NOTIFICATION_SERVICE);
-
-            //알림매니저에 채널등록
-            notificationManager.createNotificationChannel(notificationChannel);
-
-    }
-}
 
 
 //프래그먼트 교체가 일어나는 실행문
