@@ -13,6 +13,7 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Capstoneproject"
         android:usesCleartextTraffic="true">
+        <activity android:name=".ProfileName"></activity>
         <activity
             android:name=".LoadActivity"
             android:screenOrientation="portrait">

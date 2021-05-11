@@ -1,9 +1,11 @@
 package com.example.capstoneproject;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.SimpleAdapter;
@@ -18,11 +20,11 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
-public class Frag4 extends Fragment {
+public class Frag4 extends Fragment{
 
     private View view;
-    private String[] LIST_MENU = {"버전","asd","LIST3","asdasdasdasd"};
-    private String[] SubListMenu = {"v1.0","asdasd","sadasd","asdasdsadasd"};
+    private String[] LIST_MENU = {"이름","생일","사진","버전"};
+    private String[] SubListMenu = {"우리 아이 이름","우리 아이 탄생일","우리 아이 추억","v1.0"};
 
     @Nullable
     @Override
@@ -49,6 +51,22 @@ public class Frag4 extends Fragment {
 
         listview.setAdapter(adapter) ;
 
+
+        listview.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {  //클릭된 리스트뷰 이벤트 역할
+                switch (position){
+                    case 0:
+                        getActivity().startActivity(new Intent(getActivity(),ProfileName.class));
+                        break;
+                    case 1:
+                        break;
+                    case 2:
+                        break;
+                    case 3:
+                }
+            }
+        });
 
 
     return view;
