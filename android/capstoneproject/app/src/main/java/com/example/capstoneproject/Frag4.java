@@ -4,6 +4,8 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ArrayAdapter;
+import android.widget.ListView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -19,10 +21,9 @@ public class Frag4 extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
 
     view = inflater.inflate(R.layout.frag4,container,false);
-        ArrayAdapter adapter = new ArrayAdapter(this, android.R.layout.simple_list_item_1, LIST_MENU) ;
-
-        ListView listview = (ListView) findViewById(R.id.listview1) ;
-        listview.setAdapter(adapter) ;
+    ArrayAdapter adapter = new ArrayAdapter(getActivity(), android.R.layout.simple_list_item_1, LIST_MENU) ;
+    ListView listview = (ListView) view.findViewById(R.id.Settings) ;
+    listview.setAdapter(adapter) ;
 
 
     return view;
