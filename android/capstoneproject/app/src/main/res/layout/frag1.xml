@@ -4,44 +4,130 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    android:background="#FFFFD7">
 
-    <EditText
-        android:id="@+id/msg"
+
+    <TextView
+        android:id="@+id/current_data"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="24dp"
-        android:ems="10"
-        android:hint="@string/message"
-        android:inputType="textPersonName"
-        android:importantForAutofill="no" />
+        android:text="2021.05.11(Tue)"
+        android:fontFamily="@font/font1"
+        android:textFontWeight="600"
+        android:textSize="40dp"
+        android:textAlignment="center"/>
 
-    <Button
-        android:id="@+id/send"
+    <ImageView
+        android:id="@+id/imageView3"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="24dp"
-        android:text="@string/connect_send"
-        app:layout_constraintStart_toStartOf="@+id/msg"
-        app:layout_constraintTop_toBottomOf="@+id/msg" />
+        android:layout_height="250dp"
+        app:srcCompat="@drawable/littledeep_baby_style2"
+        android:layout_marginTop="50dp"
+        android:layout_marginBottom="50dp"
+        />
+<LinearLayout
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="horizontal">
 
-    <Button
-        android:id="@+id/clear"
-        android:layout_width="match_parent"
+    <TextView
+    android:id="@+id/babyname"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:text="이름"
+    android:fontFamily="@font/font1"
+    android:textFontWeight="600"
+    android:layout_marginLeft="20dp"
+    android:layout_marginRight="80dp"
+    android:textSize="30dp"/>
+
+    <TextView
+        android:id="@+id/babyage"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="24dp"
-        android:text="@string/clear"
-        app:layout_constraintStart_toStartOf="@+id/send"
-        app:layout_constraintTop_toBottomOf="@+id/send" />
+        android:text="태어난지 000 일째"
+        android:fontFamily="@font/font1"
+        android:textFontWeight="600"
+        android:gravity="right"
+        android:textSize="30dp"/>
+</LinearLayout>
+
 
     <TextView
         android:id="@+id/response"
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="24dp"
         android:text="@string/textview"
         app:layout_constraintStart_toStartOf="@+id/clear"
         app:layout_constraintTop_toBottomOf="@+id/clear" />
+
+    <TableLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:stretchColumns="0, 1, 2">
+        <TableRow>
+    <TextView
+        android:id="@+id/temper"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:text="온도"
+        android:fontFamily="@font/font1"
+        android:textFontWeight="600"
+        android:textSize="30dp"
+        />
+    <TextView
+        android:id="@+id/temper_value"
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:text="---"
+        android:fontFamily="@font/font1"
+        android:textFontWeight="600"
+        android:textSize="30dp"
+        />
+        </TableRow>
+        <TableRow>
+    <TextView
+        android:id="@+id/humi"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="습도"
+        android:fontFamily="@font/font1"
+        android:textFontWeight="600"
+        android:textSize="30dp"
+        />
+    <TextView
+        android:id="@+id/humi_value"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:text="---"
+        android:fontFamily="@font/font1"
+        android:textFontWeight="600"
+        android:textSize="30dp"
+        />
+        </TableRow>
+        <TableRow>
+    <TextView
+        android:id="@+id/dust"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="미세먼지"
+        android:fontFamily="@font/font1"
+        android:textFontWeight="600"
+        android:textSize="30dp"
+        />
+    <TextView
+        android:id="@+id/dust_value"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="---"
+        android:fontFamily="@font/font1"
+        android:textFontWeight="600"
+        android:textSize="30dp"
+        />
+        </TableRow>
+    </TableLayout>
 
     <Button
         android:id="@+id/noti"

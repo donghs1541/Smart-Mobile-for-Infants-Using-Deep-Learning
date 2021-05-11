@@ -23,14 +23,8 @@ public class ProfileName extends AppCompatActivity {
         ChangeNameLabel = (TextView)findViewById(R.id.SettingsChangeNameLabel);
         CurrentName = (TextView)findViewById(R.id.SettingsCurrentName);
         ChangeName = (TextView)findViewById(R.id.SettingsChangeName);
-        ChangeButton = (Button)findViewById(R.id.send);
 
-        ChangeButton.setOnClickListener(new View.OnClickListener() {  //이름 변경하는 리스너(db)
-            @Override
-            public void onClick(View v) {
-                ChangeName_db(v);
-            }
-        });
+
 
     }
     private void ChangeName_db(){
