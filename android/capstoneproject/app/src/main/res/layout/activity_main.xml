@@ -5,14 +5,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".MainActivity"><![CDATA[
-
-
-
-
-    />
-
-    ]]>
+    tools:context=".MainActivity"
+    android:background="#FFFFD7">
 
     <com.google.android.material.bottomnavigation.BottomNavigationView
         android:id="@+id/bottomNani"

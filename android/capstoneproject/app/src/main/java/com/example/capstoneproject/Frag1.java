@@ -5,6 +5,8 @@ import android.app.NotificationManager;
 import android.graphics.Color;
 import android.os.Build;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Message;
 import android.text.Spannable;
 import android.text.SpannableStringBuilder;
 import android.text.style.ForegroundColorSpan;
@@ -28,23 +30,53 @@ import java.util.Date;
 
 public class Frag1 extends Fragment {
 
-    TextView textResponse,babyage,current_data;
-    EditText editMsg;
-    Button buttonSend;
+    TextView babyage,current_data,temper_value,humi_value,dust_value;
     String SenSorValue;
-    String str;
+    String str,temp_temper,temp_humi,temp_dust,face_detection_value;
     public final String CHANNEL_ID = "my_notification_channel";
     public final int NOTIFICATION_ID = 101;
     private View view;
+    MyHandler mHandler = new MyHandler();
 
     public String getSenSorValue(){ //센서값 보내주기
         return SenSorValue;
     }
 
-
     public void setSenSorValue(String SenSorValue){  //센서값 받기
+        temp_temper = SenSorValue.split(" ")[0];
+        temp_humi = SenSorValue.split(" ")[1];
+        temp_dust = SenSorValue.split(" ")[2];
+        face_detection_value = SenSorValue.split(" ")[3];
 
-        textResponse.setText(SenSorValue);
+        temp_temper = String.format("%.2f", Float.parseFloat(temp_temper));
+        temp_humi = String.format("%.2f", Float.parseFloat(temp_humi));
+        temp_dust = String.format("%.2f", Float.parseFloat(temp_dust));
+
+/*
+        System.out.println("temp : "+temp_temper);
+        System.out.println("humi : "+temp_humi);
+        System.out.println("hust : "+temp_dust);
+        System.out.println("face : "+face_detection_value);
+*/
+
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                mHandler.post(new Runnable() {
+                    @Override
+                    public void run() {
+                        // UI 작업 수행 가능
+                        temper_value.setText(temp_temper);
+                        humi_value.setText(temp_humi);
+                        dust_value.setText(temp_dust);
+                    }
+                });
+            }
+        }).start();
+
+        if(face_detection_value == "person")
+            displayNotification();
+        //textResponse.setText(SenSorValue);
     }
 
 
@@ -55,9 +87,11 @@ public class Frag1 extends Fragment {
 
     view = inflater.inflate(R.layout.frag1,container,false);
 
-        textResponse = (TextView)view.findViewById(R.id.response);
         babyage = (TextView)view.findViewById(R.id.babyage);
         current_data = (TextView)view.findViewById(R.id.current_data);
+        temper_value = (TextView)view.findViewById(R.id.temper_value);
+        humi_value = (TextView)view.findViewById(R.id.humi_value);
+        dust_value = (TextView)view.findViewById(R.id.dust_value);
 
         //현재 시간 구하기
         long now = System.currentTimeMillis();
@@ -93,30 +127,27 @@ public class Frag1 extends Fragment {
 
         //Textview 부분 색깔 강조
         SpannableStringBuilder ssb = new SpannableStringBuilder(str);
-        ssb.setSpan(new ForegroundColorSpan(Color.parseColor("#01AFF1")), 5, 8, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
-
+        ssb.setSpan(new ForegroundColorSpan(Color.parseColor("#01AFF1")), 4, 7, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
 
         current_data.setText(getTime);
         babyage.setText(ssb);
 
 
-
-
-
-
-        Button btn_noti = (Button)view.findViewById(R.id.noti);
-        btn_noti.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                displayNotification(v);
-            }
-        });
     return view;
 
     }
 
+    public static class MyHandler extends Handler {
+        @Override
+        public void handleMessage(Message msg) {
+            // 다른 Thread에서 전달받은 Message 처리
+            if (msg.what == 1000) {
+
+          }
+        }
+    }
     //알림설정
-    public void displayNotification(View v){
+    public void displayNotification(){
         createNotificationChaanel();
 
         //알림설정

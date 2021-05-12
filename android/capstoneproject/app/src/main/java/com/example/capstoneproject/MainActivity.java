@@ -122,7 +122,6 @@ public class MainActivity extends AppCompatActivity{
                     out.write(Message);
                     out.flush();
 
-                    frag1.setSenSorValue("ㅁㄴ어나미오ㅓㅁ나ㅣ오ㅓㄴㅁㅇ");
                     while (true){
 
                         out.write(SendSignal);
