@@ -3,6 +3,7 @@ package com.example.capstoneproject;
 import android.app.NotificationChannel;
 import android.app.NotificationManager;
 import android.graphics.Color;
+import android.media.Image;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
@@ -15,6 +16,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -25,14 +27,18 @@ import androidx.fragment.app.Fragment;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.Date;
 
 
 public class Frag1 extends Fragment {
 
-    TextView babyage,current_data,temper_value,humi_value,dust_value;
+    TextView babyage1,babyage2,babyage3,babyage4,current_data,temper_value,humi_value,dust_value,baby_birth,dust_result;
+    ImageView dust_image;
     String SenSorValue;
     String str,temp_temper,temp_humi,temp_dust,face_detection_value;
+    String babyage1_year,babyage1_mon,babyage2_mon,babyage2_date, babyage3_value,babyage3_value_remain, babyage4_value;
+    String dust_contition;
     public final String CHANNEL_ID = "my_notification_channel";
     public final int NOTIFICATION_ID = 101;
     private View view;
@@ -48,16 +54,24 @@ public class Frag1 extends Fragment {
         temp_dust = SenSorValue.split(" ")[2];
         face_detection_value = SenSorValue.split(" ")[3];
 
+        // 미세먼지 센서 값 나누기
+       if (Float.parseFloat(temp_dust) <= 30.0)
+           dust_contition = "good";
+       else if (Float.parseFloat(temp_dust) <= 80.0 && Float.parseFloat(temp_dust) > 30.0)
+           dust_contition = "normal";
+       else if (Float.parseFloat(temp_dust) <= 150.0 && Float.parseFloat(temp_dust) > 80.0)
+           dust_contition = "bad";
+       else if (Float.parseFloat(temp_dust) > 150.0)
+           dust_contition = "verybad";
+       else
+           dust_contition = "good";
+
+
+
         temp_temper = String.format("%.2f", Float.parseFloat(temp_temper));
         temp_humi = String.format("%.2f", Float.parseFloat(temp_humi));
         temp_dust = String.format("%.2f", Float.parseFloat(temp_dust));
-
-/*
-        System.out.println("temp : "+temp_temper);
-        System.out.println("humi : "+temp_humi);
-        System.out.println("hust : "+temp_dust);
-        System.out.println("face : "+face_detection_value);
-*/
+        
 
         new Thread(new Runnable() {
             @Override
@@ -69,6 +83,30 @@ public class Frag1 extends Fragment {
                         temper_value.setText(temp_temper);
                         humi_value.setText(temp_humi);
                         dust_value.setText(temp_dust);
+
+                        // 미세먼지 센서 값에 따라 사진 및 텍스트 변경
+                        switch (dust_contition){
+                            case "good":
+                                dust_image.setImageResource(R.drawable.good);
+                                dust_result.setTextColor(Color.parseColor("#0100FF"));
+                                dust_result.setText("좋음");
+                            case "normal":
+                                dust_image.setImageResource(R.drawable.normal);
+                                dust_result.setTextColor(Color.parseColor("#1DDB16"));
+                                dust_result.setText("보통");
+                            case "bad":
+                                dust_image.setImageResource(R.drawable.bad);
+                                dust_result.setTextColor(Color.parseColor("#FFBB00"));
+                                dust_result.setText("나쁨");
+                            case "verybad":
+                                dust_image.setImageResource(R.drawable.verybad);
+                                dust_result.setTextColor(Color.parseColor("#FF0000"));
+                                dust_result.setText("매우나쁨");
+                            default:
+                                dust_image.setImageResource(R.drawable.good);
+                                dust_result.setTextColor(Color.parseColor("#0100FF"));
+                                dust_result.setText("좋음");
+                        }
                     }
                 });
             }
@@ -86,12 +124,17 @@ public class Frag1 extends Fragment {
 
 
     view = inflater.inflate(R.layout.frag1,container,false);
-
-        babyage = (TextView)view.findViewById(R.id.babyage);
+        babyage1 = (TextView)view.findViewById(R.id.babyage1);
+        babyage2 = (TextView)view.findViewById(R.id.babyage2);
+        babyage3 = (TextView)view.findViewById(R.id.babyage3);
+        babyage4 = (TextView)view.findViewById(R.id.babyage4);
+        baby_birth = (TextView)view.findViewById(R.id.baby_birth);
         current_data = (TextView)view.findViewById(R.id.current_data);
         temper_value = (TextView)view.findViewById(R.id.temper_value);
         humi_value = (TextView)view.findViewById(R.id.humi_value);
         dust_value = (TextView)view.findViewById(R.id.dust_value);
+        dust_image = (ImageView)view.findViewById(R.id.imageView4);
+        dust_result = (TextView)view.findViewById(R.id.dust_result);
 
         //현재 시간 구하기
         long now = System.currentTimeMillis();
@@ -99,9 +142,10 @@ public class Frag1 extends Fragment {
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
         String getTime = sdf.format(date);
 
+
         //태어난지 얼마나 되었는지 날짜 차이 구하기
         String date1 = getTime;
-        String date2 = "2020-02-10";
+        String date2 = "2020-07-10";
 
         try{
             // date1, date2 두 날짜를 parse()를 통해 Date형으로 변환.
@@ -115,10 +159,18 @@ public class Frag1 extends Fragment {
             // Date.getTime() 은 해당날짜를 기준으로1970년 00:00:00 부터 몇 초가 흘렀는지를 반환해준다.
             // 이제 24*60*60*1000(각 시간값에 따른 차이점) 을 나눠주면 일수가 나온다.
             long calDateDays = calDate / ( 24*60*60*1000);
-
             calDateDays = Math.abs(calDateDays);
+
+            //날짜 데이터 처리 부분
+            babyage1_year = Long.toString( calDateDays/30/12);
+            babyage1_mon = Long.toString( (calDateDays/30)%12);
+            babyage2_mon = Long.toString( calDateDays/30);
+            babyage2_date = Long.toString( calDateDays%30);
+            babyage3_value = Long.toString( calDateDays/7);
+            babyage3_value_remain = Long.toString( calDateDays%7);
+
             str = Long.toString(calDateDays);
-            str = "태어난지" + str + "일째";
+            str = str + "일";
         }
         catch(ParseException e)
         {
@@ -127,15 +179,26 @@ public class Frag1 extends Fragment {
 
         //Textview 부분 색깔 강조
         SpannableStringBuilder ssb = new SpannableStringBuilder(str);
-        ssb.setSpan(new ForegroundColorSpan(Color.parseColor("#01AFF1")), 4, 7, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
+        ssb.setSpan(new ForegroundColorSpan(Color.parseColor("#01AFF1")), 0, 3, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
 
+        //@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@baby_age1,2,3,4 바꿔야됨@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+
+
+        babyage1.setText("만 " + babyage1_year+"세 "+ babyage1_mon+"개월" );
+        babyage2.setText(babyage2_mon+"개월 "+babyage2_date+"일");
+        babyage3.setText(babyage3_value + "주 " + babyage3_value_remain + "일");
+        babyage4.setText(ssb);
         current_data.setText(getTime);
-        babyage.setText(ssb);
+        baby_birth.setText(date2);
 
 
     return view;
 
     }
+
+
+
+
 
     public static class MyHandler extends Handler {
         @Override
