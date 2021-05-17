@@ -181,7 +181,7 @@ public class Frag1 extends Fragment {
         SpannableStringBuilder ssb = new SpannableStringBuilder(str);
         ssb.setSpan(new ForegroundColorSpan(Color.parseColor("#01AFF1")), 0, 3, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
 
-        //@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@baby_age1,2,3,4 바꿔야됨@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+
 
 
         babyage1.setText("만 " + babyage1_year+"세 "+ babyage1_mon+"개월" );

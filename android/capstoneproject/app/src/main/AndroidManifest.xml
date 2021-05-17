@@ -14,6 +14,7 @@
         android:theme="@style/Theme.Capstoneproject"
         android:usesCleartextTraffic="true">
         <activity android:name=".ProfileName"></activity>
+
         <activity
             android:name=".LoadActivity"
             android:screenOrientation="portrait">
@@ -23,6 +24,8 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
+
         <activity android:name=".MainActivity" />
     </application>
 
