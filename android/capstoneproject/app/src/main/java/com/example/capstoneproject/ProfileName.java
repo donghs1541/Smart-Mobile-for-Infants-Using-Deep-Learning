@@ -47,6 +47,10 @@ public class ProfileName extends AppCompatActivity {
         ChangeName = (TextView)findViewById(R.id.SettingsChangeName);
 
         ChangeButton=(Button) findViewById(R.id.ChangeNameButton);
+
+        final JsonParse jsonParse = new JsonParse();      // AsyncTask 생성
+        jsonParse.execute("http://113.198.234.49:7776/info_load_name.php");     // AsyncTask 실행
+
         ChangeButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -100,6 +104,7 @@ public class ProfileName extends AppCompatActivity {
                 }
 
                 bufferedReader.close();
+                CurrentName.setText(sb.toString().trim());
                 Log.d(TAG, sb.toString().trim());
 
                 return sb.toString().trim();        // 받아온 JSON 의 공백을 제거

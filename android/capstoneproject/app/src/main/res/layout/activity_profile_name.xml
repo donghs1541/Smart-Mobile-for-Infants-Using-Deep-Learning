@@ -29,7 +29,7 @@
         android:layout_height="wrap_content"
         android:ems="10"
         android:inputType="textPersonName"
-        android:text="Name" />
+        android:text="변경할 이름을 입력해주세요" />
 
     <TextView
         android:id="@+id/SettingsCurrentNameLabel"
