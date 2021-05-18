@@ -57,9 +57,10 @@ public class Frag4 extends Fragment{
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {  //클릭된 리스트뷰 이벤트 역할
                 switch (position){
                     case 0:
-                        getActivity().startActivity(new Intent(getActivity(),ProfileName.class));
+                        getActivity().startActivity(new Intent(getActivity(),ProfileName.class)); //이름 변경
                         break;
                     case 1:
+                        getActivity().startActivity(new Intent(getActivity(),CalendarActivity.class)); //생일 변경
                         break;
                     case 2:
                         break;
