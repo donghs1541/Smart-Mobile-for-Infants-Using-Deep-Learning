@@ -81,7 +81,7 @@ def accept_func():
     server_socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
     server_socket.setsockopt(socket.SOL_SOCKET, socket.SO_REUSEADDR, 1)
 
-    server_socket.bind(("113.198.234.49", 55000))
+    server_socket.bind(("113.198.234.39", 55000))
     server_socket.listen(5)
     try:
         client_socket, addr = server_socket.accept()

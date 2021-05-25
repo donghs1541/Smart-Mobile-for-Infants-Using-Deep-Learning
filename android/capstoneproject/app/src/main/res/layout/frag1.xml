@@ -259,7 +259,7 @@
                                     android:fontFamily="@font/font1"
                                     android:text="---"
                                     android:textFontWeight="600"
-                                    android:textSize="20dp" />
+                                    android:textSize="15dp" />
                             </TableRow>
                         </TableLayout>
 

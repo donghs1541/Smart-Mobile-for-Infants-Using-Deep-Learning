@@ -110,22 +110,27 @@ public class Frag1 extends Fragment {
                                 dust_image.setImageResource(R.drawable.good);
                                 dust_result.setTextColor(Color.parseColor("#0100FF"));
                                 dust_result.setText("좋음");
+                                break;
                             case "normal":
                                 dust_image.setImageResource(R.drawable.normal);
                                 dust_result.setTextColor(Color.parseColor("#1DDB16"));
                                 dust_result.setText("보통");
+                                break;
                             case "bad":
                                 dust_image.setImageResource(R.drawable.bad);
                                 dust_result.setTextColor(Color.parseColor("#FFBB00"));
                                 dust_result.setText("나쁨");
+                                break;
                             case "verybad":
                                 dust_image.setImageResource(R.drawable.verybad);
                                 dust_result.setTextColor(Color.parseColor("#FF0000"));
                                 dust_result.setText("매우나쁨");
+                                break;
                             default:
                                 dust_image.setImageResource(R.drawable.good);
                                 dust_result.setTextColor(Color.parseColor("#0100FF"));
                                 dust_result.setText("좋음");
+                                break;
                         }
                     }
                 });
