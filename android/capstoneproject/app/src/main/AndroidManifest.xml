@@ -14,6 +14,8 @@
         android:theme="@style/Theme.Capstoneproject"
         android:usesCleartextTraffic="true">
         <activity android:name=".CalendarActivity"></activity>
+        <activity android:name=".Frag5"></activity>
+
         <activity android:name=".ProfileName" />
         <activity
             android:name=".LoadActivity"

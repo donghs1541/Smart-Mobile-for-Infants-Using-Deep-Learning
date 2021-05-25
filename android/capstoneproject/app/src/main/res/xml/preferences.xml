@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
+    <PreferenceCategory android:title="이름 변경">
+        <PreferenceScreen
+
+            android:key="name_change"
+            android:title="이름"
+            android:summary="응애">
+        </PreferenceScreen>
+
+
+    </PreferenceCategory>
+
+    <PreferenceCategory android:title="생일 설정">
+        <PreferenceScreen
+            android:key="birth_change"
+            android:title="생일 설정"
+            android:summary="2021.05.25">
+        </PreferenceScreen>
+
+    </PreferenceCategory>
+
+
+    <PreferenceCategory android:title="Settings">
+        <PreferenceScreen
+            android:key="setting1"
+            android:title="고객센터"
+            android:summary="051.890.XXXX">
+        </PreferenceScreen>
+
+        <PreferenceScreen
+            android:key="setting2"
+            android:title="버전"
+            android:summary="V1.0">
+        </PreferenceScreen>
+    </PreferenceCategory>
+
+</PreferenceScreen>

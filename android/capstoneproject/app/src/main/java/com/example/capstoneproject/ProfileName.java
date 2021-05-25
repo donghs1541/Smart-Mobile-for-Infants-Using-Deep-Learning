@@ -1,6 +1,8 @@
 package com.example.capstoneproject;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentTransaction;
 
 
 import android.os.AsyncTask;
@@ -35,12 +37,14 @@ public class ProfileName extends AppCompatActivity {
     private TextView CurrentName;
     private TextView ChangeName;
     private Button ChangeButton;
-    private String jsonString; //s
+    private String jsonString;
+    private Frag1 frag1;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_profile_name);
-
+        frag1 = new Frag1();
         CurrentNameLabel = (TextView)findViewById(R.id.SettingsCurrentNameLabel);
         ChangeNameLabel = (TextView)findViewById(R.id.SettingsChangeNameLabel);
         CurrentName = (TextView)findViewById(R.id.SettingsCurrentName);
@@ -56,6 +60,8 @@ public class ProfileName extends AppCompatActivity {
             public void onClick(View v) {
                 final JsonParse jsonParse = new JsonParse();      // AsyncTask 생성
                 jsonParse.execute("http://113.198.234.49:7776/info_insert.php");     // AsyncTask 실행
+
+
             }
         });
     }

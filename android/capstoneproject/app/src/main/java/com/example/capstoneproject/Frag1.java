@@ -26,6 +26,7 @@ import androidx.annotation.Nullable;
 import androidx.core.app.NotificationCompat;
 import androidx.core.app.NotificationManagerCompat;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentTransaction;
 
 import java.io.BufferedReader;
 import java.io.InputStream;
@@ -138,9 +139,13 @@ public class Frag1 extends Fragment {
         }).start();
 
         if(face_detection_value == "person")
+            System.out.println("asdfasdfasdfasdfasdfgewqewtwqqww");
             displayNotification();
         //textResponse.setText(SenSorValue);
     }
+
+
+
 
 
     @Nullable
@@ -164,15 +169,15 @@ public class Frag1 extends Fragment {
         final Frag1.JsonParse jsonParse = new Frag1.JsonParse();      // AsyncTask 생성
         jsonParse.execute("http://113.198.234.49:7776/info_load_birthday.php");     // 이름과 생일을 db에서 불러오는 부분
 
-
-
     return view;
 
     }
 
 
-
-
+    private void refresh(){
+        FragmentTransaction transaction = getFragmentManager().beginTransaction();
+        transaction.detach(this).attach(this).commit();
+    }
 
     public static class MyHandler extends Handler {
         @Override
@@ -186,18 +191,17 @@ public class Frag1 extends Fragment {
     //알림설정
     public void displayNotification(){
         createNotificationChaanel();
-
         //알림설정
         NotificationCompat.Builder builder = new NotificationCompat.Builder(getActivity(),CHANNEL_ID);
         builder.setSmallIcon((R.drawable.alram_icon));
-        builder.setContentTitle("2021.05.10 오마이걸 컴백");
-        builder.setContentText("Dun Dun Dance");
+        builder.setContentTitle("Emergency!");
+        builder.setContentText("아이의 얼굴이 보이지 않습니다");
         builder.setPriority(NotificationManagerCompat.IMPORTANCE_DEFAULT);
         builder.setAutoCancel(true);
         NotificationManagerCompat notificationManagerCompat = NotificationManagerCompat.from(getActivity());
         notificationManagerCompat.notify(NOTIFICATION_ID,builder.build());
-
     }
+
     //채널설정
     private void createNotificationChaanel(){
         //오레오부터 알림을 채널에 등록해야함

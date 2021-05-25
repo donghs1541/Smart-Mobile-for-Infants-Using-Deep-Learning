@@ -47,7 +47,7 @@ import java.io.OutputStreamWriter;
 import java.io.PrintWriter;
 import java.net.Socket;
 
-public class MainActivity extends AppCompatActivity{
+public class MainActivity extends AppCompatActivity {
 
 
     private BottomNavigationView bottomNavigationView;
@@ -57,16 +57,18 @@ public class MainActivity extends AppCompatActivity{
     private Frag2 frag2;
     private Frag3 frag3;
     private Frag4 frag4;
+    private Frag5 frag5;
+
     private String SendSignal = "000"; // 서버에 시그널 보내는 변수
 
 
     String Message = "android";
     String txtRecevie = "";
-     byte[] buffer = new byte[1024]; //읽어오는 버퍼 크기
-     Socket client;
-     OutputStream  outputStream;
-     ByteArrayOutputStream byteArrayOutputStream;
-     PrintWriter out;
+    byte[] buffer = new byte[1024]; //읽어오는 버퍼 크기
+    Socket client;
+    OutputStream  outputStream;
+    ByteArrayOutputStream byteArrayOutputStream;
+    PrintWriter out;
     InputStream inputStream;
     BufferedReader reader ;
 
@@ -104,6 +106,8 @@ public class MainActivity extends AppCompatActivity{
         frag2 = new Frag2();
         frag3 = new Frag3();
         frag4 = new Frag4();
+        frag5 = new Frag5();
+
 
         setFrag(0); //첫 프래그먼트 화면 지정
 
@@ -128,8 +132,6 @@ public class MainActivity extends AppCompatActivity{
                         out.flush();
 
                         if (SendSignal =="000") { //센서값 받기 
-
-                            System.out.println("asdasdaasdasdasdsadasdasdsadsadasdsadsasdasd");
                             int size = inputStream.read(buffer);
                             txtRecevie = new String(buffer, 0, size, "UTF-8");
                             System.out.println("asdasdasdasd" + txtRecevie);
@@ -178,8 +180,7 @@ public class MainActivity extends AppCompatActivity{
                 ft.commit();
                 break;
             case 3:
-                ft.replace(R.id.main_frame,frag4);
-                ft.commit();
+                startActivity(new Intent(getApplicationContext(),Frag5.class));
                 break;
         }
 

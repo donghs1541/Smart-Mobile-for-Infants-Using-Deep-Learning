@@ -23,9 +23,10 @@ import java.util.Map;
 public class Frag4 extends Fragment{
 
     private View view;
+   // private String[] LIST_MENU = {"이름","생일","고객센터","버전"};
+  //  private String[] SubListMenu = {"051-890-xxxx","우리 아이 탄생일","우리 아이 이름","v1.0"};
     private String[] LIST_MENU = {"이름","생일","고객센터","버전"};
-    private String[] SubListMenu = {"우리 아이 이름","우리 아이 탄생일","051-890-xxxx","v1.0"};
-
+    private String[] SubListMenu = {"051-890-xxxx","우리 아이 탄생일","우리 아이 이름","v1.0"};
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -64,8 +65,10 @@ public class Frag4 extends Fragment{
                         getActivity().startActivity(new Intent(getActivity(),CalendarActivity.class)); //생일 변경
                         break;
                     case 2:
+
                         break;
                     case 3:
+                        break;
                 }
             }
         });
