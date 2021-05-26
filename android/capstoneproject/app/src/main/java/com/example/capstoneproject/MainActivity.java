@@ -47,7 +47,7 @@ import java.io.OutputStreamWriter;
 import java.io.PrintWriter;
 import java.net.Socket;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity implements Frag2.OnTimePickerSetListener{
 
 
     private BottomNavigationView bottomNavigationView;
@@ -116,7 +116,7 @@ public class MainActivity extends AppCompatActivity {
             public void run(){
                 try {
                     Message ="android";
-                    client = new Socket("113.198.234.39", 55000);
+                    client = new Socket("113.198.234.49", 55000);
                     outputStream = client.getOutputStream();   // 소켓통신 outputstream선언
                     inputStream = client.getInputStream();
                     reader = new BufferedReader(new InputStreamReader(inputStream));
@@ -128,16 +128,16 @@ public class MainActivity extends AppCompatActivity {
 
                     while (true){
 
-                        out.write(SendSignal);
-                        out.flush();
-
-                        if (SendSignal =="000") { //센서값 받기 
+                        if (SendSignal =="000") { //센서값 받기
+                            out.write("000");
+                            out.flush();
+                            System.out.println("asdasdaasdasdasdsadasdasdsadsadasdsadsasdasd");
                             int size = inputStream.read(buffer);
                             txtRecevie = new String(buffer, 0, size, "UTF-8");
                             System.out.println("asdasdasdasd" + txtRecevie);
                             frag1.setSenSorValue(txtRecevie);
                             try{
-                                Thread.sleep(3000); // 3초지연
+                                Thread.sleep(5000); // 5초지연
                             }
                             catch (Exception e){
                                 e.printStackTrace(); //오류 출력
@@ -146,7 +146,14 @@ public class MainActivity extends AppCompatActivity {
 
                         }
                         else if (SendSignal=="111"){ //CCTV일때
-                            System.out.println("기다리기");
+                            out.write("111");
+                            out.flush();
+                            while (SendSignal !="000"){
+
+                            }
+                            out.write("123");
+                            out.flush();
+
                         }
 
                     }
@@ -186,4 +193,12 @@ public class MainActivity extends AppCompatActivity {
 
 
     }
+
+    @Override
+    public void onTimePickerSet(String SendSignal) {
+        System.out.println(this.SendSignal);
+        this.SendSignal = SendSignal;
+        System.out.println(this.SendSignal);
+    }
+
 }

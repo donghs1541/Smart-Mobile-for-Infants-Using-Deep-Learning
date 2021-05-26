@@ -1,5 +1,6 @@
 package com.example.capstoneproject;
 
+import android.content.Context;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -23,6 +24,29 @@ import android.widget.Button;
 
 public class Frag2 extends Fragment {
 
+    private  OnTimePickerSetListener onTimePickerSetListener;
+
+    public interface OnTimePickerSetListener{
+
+        void onTimePickerSet(String signal);
+    }
+    @Override
+    public void onAttach(Context context){
+        super.onAttach(context);
+        if(context instanceof Frag2.OnTimePickerSetListener){
+            onTimePickerSetListener =  (OnTimePickerSetListener) context;
+        }
+        else{
+            throw new RuntimeException(context.toString()+" 임플리먼트 해줘라");
+        }
+    }
+
+    @Override
+    public void onDetach()
+    {
+        super.onDetach();
+        onTimePickerSetListener = null;
+    }
 
     private View view;
     private WebView mWebView; // 웹뷰 선언
@@ -37,17 +61,17 @@ public class Frag2 extends Fragment {
         cctvon = (Button)view.findViewById(R.id.cctvon);
         cctvoff = (Button)view.findViewById(R.id.cctvoff);
 
-        cctvon.setOnClickListener(new View.OnClickListener() {
+        cctvon.setOnClickListener(new View.OnClickListener() { //cctv on 버튼
             @Override
             public void onClick(View v) {
-
+                onTimePickerSetListener.onTimePickerSet("111");
             }
         });
 
-        cctvoff.setOnClickListener(new View.OnClickListener() {
+        cctvoff.setOnClickListener(new View.OnClickListener() { //cctv off 버튼 
             @Override
             public void onClick(View v) {
-
+                onTimePickerSetListener.onTimePickerSet("000");
             }
         });
 
@@ -55,7 +79,7 @@ public class Frag2 extends Fragment {
         mWebView.setWebViewClient(new WebViewClient());
         mWebSettings = mWebView.getSettings();
         mWebSettings.setJavaScriptEnabled(true);
-        mWebView.loadUrl("http://www.naver.com"); // 주소를 바꿔야함()
+        mWebView.loadUrl("http://113.198.234.49:57575"); // 주소를 바꿔야함()
 
 
 
@@ -64,14 +88,6 @@ public class Frag2 extends Fragment {
         return view;
 
     }
-
-    public interface OnTimePickerSetListener{
-        void OnTimePickerSet(int hour, int min);
-    }
-
-
-
-
 
 
 
