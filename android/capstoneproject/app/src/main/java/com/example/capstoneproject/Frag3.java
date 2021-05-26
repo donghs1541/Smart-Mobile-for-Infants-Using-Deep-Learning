@@ -49,8 +49,9 @@ public class Frag3 extends Fragment {
                 arrayList.add(mainData);
                 mainAdapter.notifyDataSetChanged();
 
+                // onclickListener빼고 자동으로 갱신되게 해야됨. DB에 저장된 currentTime 불러와서 Listadd해야됨
             }
-        });
+       });
 
     return view;
 

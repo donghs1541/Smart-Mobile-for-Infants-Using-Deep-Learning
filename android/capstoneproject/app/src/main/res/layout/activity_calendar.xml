@@ -12,10 +12,14 @@
         android:layout_width="match_parent"
         android:layout_height="372dp" />
 
+
     <Button
         android:id="@+id/BirthdayChangeButton"
-        android:layout_width="226dp"
-        android:layout_height="wrap_content"
-        android:text="@string/변경" />
-
+        android:layout_width="104dp"
+        android:layout_height="56dp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginTop="25dp"
+        android:fontFamily="@font/font1"
+        android:text="@string/변경"
+        android:textFontWeight="600" />
 </LinearLayout>

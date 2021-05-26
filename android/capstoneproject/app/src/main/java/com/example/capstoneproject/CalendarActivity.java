@@ -9,6 +9,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.CalendarView;
+import android.widget.Toast;
 
 import java.io.BufferedReader;
 import java.io.InputStream;
@@ -36,7 +37,7 @@ public class CalendarActivity extends AppCompatActivity {
             public void onSelectedDayChange(@NonNull CalendarView view, int year, int month, int dayOfMonth) {
 
                 String years = Integer.toString(year);
-                String months = Integer.toString(month);
+                String months = Integer.toString(month+1);
                 String day = Integer.toString(dayOfMonth);
                 date = years+"-"+months+"-"+day;
 
@@ -50,6 +51,8 @@ public class CalendarActivity extends AppCompatActivity {
                 if (date !="") {
                     final CalendarActivity.JsonParse jsonParse = new CalendarActivity.JsonParse();      // AsyncTask 생성
                     jsonParse.execute("http://113.198.234.49:7776/update_birthday.php");     // AsyncTask 실행
+                    Toast.makeText(CalendarActivity.this, "생일 변경 완료", Toast.LENGTH_SHORT).show();
+
                 }
             }
         });

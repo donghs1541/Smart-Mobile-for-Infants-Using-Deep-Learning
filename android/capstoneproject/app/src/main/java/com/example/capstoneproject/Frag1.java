@@ -142,7 +142,13 @@ public class Frag1 extends Fragment {
         if(face_detection_value == "person")
             System.out.println("asdfasdfasdfasdfasdfgewqewtwqqww");
             displayNotification();
-        //textResponse.setText(SenSorValue);
+
+            long now = System.currentTimeMillis();
+            Date mDate = new Date(now);
+            SimpleDateFormat simpleDate = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
+            String currentTime = simpleDate.format(mDate); //DB에 저장할 알람 string
+
+
     }
 
 

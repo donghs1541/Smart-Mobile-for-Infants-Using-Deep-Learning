@@ -5,6 +5,7 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
 
 
+import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.util.Log;
@@ -18,6 +19,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -61,9 +63,7 @@ public class ProfileName extends AppCompatActivity {
                 final JsonParse jsonParse = new JsonParse();      // AsyncTask 생성
                 jsonParse.execute("http://113.198.234.49:7776/info_insert.php");     // AsyncTask 실행
 
-
-
-
+                Toast.makeText(ProfileName.this, "이름 변경 완료", Toast.LENGTH_SHORT).show();
             }
         });
     }
