@@ -27,6 +27,7 @@ import androidx.core.app.NotificationCompat;
 import androidx.core.app.NotificationManagerCompat;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import java.io.BufferedReader;
 import java.io.InputStream;
@@ -164,6 +165,16 @@ public class Frag1 extends Fragment {
         dust_image = (ImageView)view.findViewById(R.id.imageView4);
         dust_result = (TextView)view.findViewById(R.id.dust_result);
         NameText = (TextView)view.findViewById(R.id.babyname);
+
+        final SwipeRefreshLayout pullToRefresh = view.findViewById(R.id.swiperefresh);
+        pullToRefresh.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                refresh();
+                //pullToRefresh.setRefreshing(false);
+            }
+        });
+
 
 
         final Frag1.JsonParse jsonParse = new Frag1.JsonParse();      // AsyncTask 생성

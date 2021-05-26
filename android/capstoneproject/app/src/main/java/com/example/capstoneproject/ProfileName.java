@@ -49,8 +49,8 @@ public class ProfileName extends AppCompatActivity {
         ChangeNameLabel = (TextView)findViewById(R.id.SettingsChangeNameLabel);
         CurrentName = (TextView)findViewById(R.id.SettingsCurrentName);
         ChangeName = (TextView)findViewById(R.id.SettingsChangeName);
-
         ChangeButton=(Button) findViewById(R.id.ChangeNameButton);
+
 
         final JsonParse jsonParse = new JsonParse();      // AsyncTask 생성
         jsonParse.execute("http://113.198.234.49:7776/info_load_name.php");     // AsyncTask 실행
@@ -60,6 +60,8 @@ public class ProfileName extends AppCompatActivity {
             public void onClick(View v) {
                 final JsonParse jsonParse = new JsonParse();      // AsyncTask 생성
                 jsonParse.execute("http://113.198.234.49:7776/info_insert.php");     // AsyncTask 실행
+
+
 
 
             }
