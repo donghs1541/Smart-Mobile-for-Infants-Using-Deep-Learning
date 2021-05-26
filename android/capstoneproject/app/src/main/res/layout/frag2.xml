@@ -7,7 +7,7 @@
     <WebView
         android:id="@+id/webview_login"
         android:layout_width="match_parent"
-        android:layout_height="566dp" />
+        android:layout_height="288dp" />
 
     <Button
         android:id="@+id/cctvon"

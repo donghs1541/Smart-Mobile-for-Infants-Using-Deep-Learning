@@ -140,10 +140,10 @@ public class MainActivity extends AppCompatActivity implements Frag2.OnTimePicke
                             System.out.println("asdasdasdasd" + txtRecevie);
                             frag1.setSenSorValue(txtRecevie);
                             try{
-                                Thread.sleep(5000); // 5초지연
+                                Thread.sleep(5000); // 5초지연.
                             }
                             catch (Exception e){
-                                e.printStackTrace(); //오류 출력
+                                e.printStackTrace(); //오류 출력-
                             }
 
 
@@ -202,6 +202,7 @@ public class MainActivity extends AppCompatActivity implements Frag2.OnTimePicke
         System.out.println(this.SendSignal);
         this.SendSignal = SendSignal;
         System.out.println(this.SendSignal);
+
     }
 
 }
