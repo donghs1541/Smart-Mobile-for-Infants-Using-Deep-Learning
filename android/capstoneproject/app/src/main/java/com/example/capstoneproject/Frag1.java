@@ -207,16 +207,21 @@ public class Frag1 extends Fragment {
     }
     //알림설정
     public void displayNotification(){
-        createNotificationChaanel();
-        //알림설정
-        NotificationCompat.Builder builder = new NotificationCompat.Builder(getActivity(),CHANNEL_ID);
-        builder.setSmallIcon((R.drawable.alram_icon));
-        builder.setContentTitle("Emergency!");
-        builder.setContentText("아이의 얼굴이 보이지 않습니다");
-        builder.setPriority(NotificationManagerCompat.IMPORTANCE_DEFAULT);
-        builder.setAutoCancel(true);
-        NotificationManagerCompat notificationManagerCompat = NotificationManagerCompat.from(getActivity());
-        notificationManagerCompat.notify(NOTIFICATION_ID,builder.build());
+        try {
+            createNotificationChaanel();
+            //알림설정
+            NotificationCompat.Builder builder = new NotificationCompat.Builder(getActivity(), CHANNEL_ID);
+            builder.setSmallIcon((R.drawable.alram_icon));
+            builder.setContentTitle("Emergency!");
+            builder.setContentText("아이의 얼굴이 보이지 않습니다");
+            builder.setPriority(NotificationManagerCompat.IMPORTANCE_DEFAULT);
+            builder.setAutoCancel(true);
+            NotificationManagerCompat notificationManagerCompat = NotificationManagerCompat.from(getActivity());
+            notificationManagerCompat.notify(NOTIFICATION_ID, builder.build());
+        }
+        catch (Exception e){
+            System.out.println(e);
+        }
     }
 
     //채널설정
