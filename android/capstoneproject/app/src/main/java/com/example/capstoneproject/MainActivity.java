@@ -148,7 +148,7 @@ public class MainActivity extends AppCompatActivity implements Frag2.OnTimePicke
                         else if (SendSignal=="111"){ //CCTV일때
                             out.write("111");
                             out.flush();
-                            while (SendSignal !="000"){
+                            while (SendSignal =="111"){
 
                             }
                             out.write("123");

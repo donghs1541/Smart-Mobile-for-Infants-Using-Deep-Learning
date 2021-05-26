@@ -65,6 +65,7 @@ public class Frag2 extends Fragment {
             @Override
             public void onClick(View v) {
                 onTimePickerSetListener.onTimePickerSet("111");
+                mWebView.reload();
             }
         });
 
@@ -72,6 +73,7 @@ public class Frag2 extends Fragment {
             @Override
             public void onClick(View v) {
                 onTimePickerSetListener.onTimePickerSet("000");
+                mWebView.reload();
             }
         });
 

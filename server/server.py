@@ -24,24 +24,28 @@ def recvall(sock, count):
         count -= len(newbuf)
     return buf
 
-img_recv = '333'
+choice = ''
 def recv_img():
-    global img_recv
+    global choice
     recv_text = user_list[b'android'].recv(1024)
     recv_text = recv_text.decode()
+    print("리시브 이미지",choice)
     if recv_text == '123':
         lock.acquire()
-        img_recv = '444'
+        choice = '444'
         lock.release()
 
 
 def handle_receive(user):
+    global choice
     while 1:
         choice = user_list[b'android'].recv(1024)
         choice = choice.decode()
 
-        user_list[b'pi'].sendall(choice.encode())
-        if choice == "000":
+        print("안드로이드 -> 서버 신호 :", choice)
+
+        if choice == "000" or choice == "000000" or choice == "111000":
+            user_list[b'pi'].sendall(choice.encode())
 
             data = user_list[b'pi'].recv(1024)
             string = data.decode("utf-8").rstrip()
@@ -51,27 +55,29 @@ def handle_receive(user):
 
             user_list[b'android'].sendall(bytes(string.encode()))
             print("android to pi : ", string)
-            print("andtopi_temp :" ,andtopi_temp)
 
 
-        elif choice =='111':
-            global img_recv
+
+        elif choice =='111' or choice == '000111' or choice == '000000111':
+            print("cctv시작", choice)
             threading.Thread(target=recv_img, args=()).start()
-            if img_recv == '333':
+            while choice == '111':
                 gen_frames()
 
+            print("cctv종료", choice)
             user_list[b'pi'].sendall('444'.encode())
-            img_recv = '333'
+            choice = '111'
     user_list[b'pi'].close()
     user_list[b'android'].close()
 
 
 def gen_frames():  # generate frame by frame from camera
-    global img_recv
-    while img_recv == "333":
-        try:
-            user_list[b'pi'].sendall(img_recv.encode())
+    global choice
 
+    print(choice)
+    while choice =='111' or choice == '000111' or choice == '000000111':
+        try:
+            user_list[b'pi'].sendall(choice.encode())
 
             length = recvall(user_list[b'pi'], 16)
             stringData = recvall(user_list[b'pi'], int(length))
