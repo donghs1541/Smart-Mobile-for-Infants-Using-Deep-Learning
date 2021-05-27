@@ -47,7 +47,7 @@ def handle_receive(user):
     global choice
     global choice2
     global frame
-    while 1:
+    while True:
         choice = user_list[b'android'].recv(1024)
         choice = choice.decode()
 
@@ -55,14 +55,17 @@ def handle_receive(user):
         user_list[b'pi'].sendall(choice.encode())
 
         if choice == "000" or choice == "000000" or choice == "111000":
-
-            data = user_list[b'pi'].recv(1024)
-            string = data.decode("utf-8").rstrip()
-            vysl = string.encode("utf8")
-            user_list[b'android'].sendall(vysl)
-            print("android to pi : ", string)
-
-
+            Check = True
+            while Check:
+                try:
+                    data = user_list[b'pi'].recv(1024)
+                    string = data.decode("utf-8").rstrip()
+                    vysl = string.encode("utf8")
+                    user_list[b'android'].sendall(vysl)
+                    print("android to pi : ", string)
+                    Check = False
+                except Exception as e :
+                    print("오류",e)
 
         elif choice =='111' or choice == '000111' or choice == '000000111':
             print("cctv시작", choice)
