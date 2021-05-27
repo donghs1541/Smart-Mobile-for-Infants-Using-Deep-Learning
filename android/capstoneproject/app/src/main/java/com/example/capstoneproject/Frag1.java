@@ -60,6 +60,7 @@ public class Frag1 extends Fragment {
     private String date2; //아기 탄생일 불러오기 위한 String
     private Date FirstDate;
     private Date SecondDate;
+    private String currentTime; // 현재 알람
 
 
     MyHandler mHandler = new MyHandler();
@@ -146,7 +147,10 @@ public class Frag1 extends Fragment {
             long now = System.currentTimeMillis();
             Date mDate = new Date(now);
             SimpleDateFormat simpleDate = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
-            String currentTime = simpleDate.format(mDate); //DB에 저장할 알람 string
+            currentTime = simpleDate.format(mDate); //DB에 저장할 알람 string
+
+            final Frag1.JsonParse jsonParse = new Frag1.JsonParse();      // AsyncTask 생성
+            jsonParse.execute("http://113.198.234.49:7776/info_noti.php");     // 이름과 생일을 db에서 불러오는 부분
 
 
     }
@@ -253,18 +257,44 @@ public class Frag1 extends Fragment {
 
     public class JsonParse extends AsyncTask<String, Void, String> {   // DB날짜 불러오는  클래스
         String TAG = "JsonParseTest";
+        String url;
+        URL serverURL;
+        HttpURLConnection httpURLConnection;
         @Override
         protected String doInBackground(String... strings) {
             // execute의 매개변수를 받아와서 사용
-            String url = strings[0];
+            url = strings[0];
             try {
-                URL serverURL = new URL(url);
-                HttpURLConnection httpURLConnection = (HttpURLConnection) serverURL.openConnection();
+                switch (url){
+                    case ("http://113.198.234.49:7776/info_load_birthday.php"):
+                        serverURL = new URL(url);
+                        httpURLConnection = (HttpURLConnection) serverURL.openConnection();
 
-                httpURLConnection.setReadTimeout(15000);
-                httpURLConnection.setConnectTimeout(15000);
-                httpURLConnection.setRequestMethod("POST");
-                httpURLConnection.connect();
+                        httpURLConnection.setReadTimeout(15000);
+                        httpURLConnection.setConnectTimeout(15000);
+                        httpURLConnection.setRequestMethod("POST");
+                        httpURLConnection.connect();
+                        break;
+                    case ("http://113.198.234.49:7776/info_noti.php"):
+                        String selectData = "Data=" + currentTime;
+                        // 따옴표 안과 php의 post [ ] 안이 이름이 같아야 함
+
+                        serverURL = new URL(url);
+                        httpURLConnection = (HttpURLConnection) serverURL.openConnection();
+
+                        httpURLConnection.setReadTimeout(15000);
+                        httpURLConnection.setConnectTimeout(15000);
+                        httpURLConnection.setRequestMethod("POST");
+                        httpURLConnection.connect();
+
+                        OutputStream outputStream = httpURLConnection.getOutputStream();
+                        outputStream.write(selectData.getBytes("UTF-8"));
+                        outputStream.flush();
+                        outputStream.close();
+                        // 어플에서 데이터 전송
+
+                }
+
 
                 int responseStatusCode = httpURLConnection.getResponseCode();
 
@@ -299,66 +329,77 @@ public class Frag1 extends Fragment {
 
         protected void onPostExecute(String value){
             super.onPostExecute(value);
-            String[] temp = value.split(" ");
-            date2 = temp[0]; // 날짜(생일)
-            String name = temp[1]; //이름
-            System.out.println(date2);
+            switch (url){
+                case ("http://113.198.234.49:7776/info_load_birthday.php"):
+                    String[] temp = value.split(" ");
+                    date2 = temp[0]; // 날짜(생일)
+                    String name = temp[1]; //이름
+                    System.out.println(date2);
 
 
-            //현재 시간 구하기
-            long now = System.currentTimeMillis();
-            Date date = new Date(now);
-            SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
-            String getTime = sdf.format(date);
+                    //현재 시간 구하기
+                    long now = System.currentTimeMillis();
+                    Date date = new Date(now);
+                    SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+                    String getTime = sdf.format(date);
 
 
-            //태어난지 얼마나 되었는지 날짜 차이 구하기
-            date1 = getTime;
-            System.out.println(date2+"asdsadasd");
-            try{
-                // date1, date2 두 날짜를 parse()를 통해 Date형으로 변환.
-                FirstDate = sdf.parse(date1);
-                SecondDate = sdf.parse(date2);
+                    //태어난지 얼마나 되었는지 날짜 차이 구하기
+                    date1 = getTime;
+                    System.out.println(date2+"asdsadasd");
+                    try{
+                        // date1, date2 두 날짜를 parse()를 통해 Date형으로 변환.
+                        FirstDate = sdf.parse(date1);
+                        SecondDate = sdf.parse(date2);
 
-                // Date로 변환된 두 날짜를 계산한 뒤 그 리턴값으로 long type 변수를 초기화 하고 있다.
-                // 연산결과 -950400000. long type 으로 return 된다.
-                long calDate = FirstDate.getTime() - SecondDate.getTime();
+                        // Date로 변환된 두 날짜를 계산한 뒤 그 리턴값으로 long type 변수를 초기화 하고 있다.
+                        // 연산결과 -950400000. long type 으로 return 된다.
+                        long calDate = FirstDate.getTime() - SecondDate.getTime();
 
-                // Date.getTime() 은 해당날짜를 기준으로1970년 00:00:00 부터 몇 초가 흘렀는지를 반환해준다.
-                // 이제 24*60*60*1000(각 시간값에 따른 차이점) 을 나눠주면 일수가 나온다.
-                long calDateDays = calDate / ( 24*60*60*1000);
-                calDateDays = Math.abs(calDateDays);
+                        // Date.getTime() 은 해당날짜를 기준으로1970년 00:00:00 부터 몇 초가 흘렀는지를 반환해준다.
+                        // 이제 24*60*60*1000(각 시간값에 따른 차이점) 을 나눠주면 일수가 나온다.
+                        long calDateDays = calDate / ( 24*60*60*1000);
+                        calDateDays = Math.abs(calDateDays);
 
-                //날짜 데이터 처리 부분
-                babyage1_year = Long.toString( calDateDays/30/12);
-                babyage1_mon = Long.toString( (calDateDays/30)%12);
-                babyage2_mon = Long.toString( calDateDays/30);
-                babyage2_date = Long.toString( calDateDays%30);
-                babyage3_value = Long.toString( calDateDays/7);
-                babyage3_value_remain = Long.toString( calDateDays%7);
+                        //날짜 데이터 처리 부분
+                        babyage1_year = Long.toString( calDateDays/30/12);
+                        babyage1_mon = Long.toString( (calDateDays/30)%12);
+                        babyage2_mon = Long.toString( calDateDays/30);
+                        babyage2_date = Long.toString( calDateDays%30);
+                        babyage3_value = Long.toString( calDateDays/7);
+                        babyage3_value_remain = Long.toString( calDateDays%7);
 
-                str = Long.toString(calDateDays);
-                str = str + "일";
+                        str = Long.toString(calDateDays);
+                        str = str + "일";
+                    }
+                    catch(ParseException e)
+                    {
+                        // 예외 처리
+                    }
+
+                    //Textview 부분 색깔 강조
+                    SpannableStringBuilder ssb = new SpannableStringBuilder(str);
+                    ssb.setSpan(new ForegroundColorSpan(Color.parseColor("#01AFF1")), 0, 3, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
+
+
+
+
+                    babyage1.setText("만 " + babyage1_year+"세 "+ babyage1_mon+"개월" );
+                    babyage2.setText(babyage2_mon+"개월 "+babyage2_date+"일");
+                    babyage3.setText(babyage3_value + "주 " + babyage3_value_remain + "일");
+                    babyage4.setText(ssb);
+                    NameText.setText(name);
+                    current_data.setText(getTime);
+                    baby_birth.setText(date2);
+                    break;
+
+                case ("http://113.198.234.49:7776/info_noti.php"):
+
+                    break;
+
             }
-            catch(ParseException e)
-            {
-                // 예외 처리
-            }
-
-            //Textview 부분 색깔 강조
-            SpannableStringBuilder ssb = new SpannableStringBuilder(str);
-            ssb.setSpan(new ForegroundColorSpan(Color.parseColor("#01AFF1")), 0, 3, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
 
 
-
-
-            babyage1.setText("만 " + babyage1_year+"세 "+ babyage1_mon+"개월" );
-            babyage2.setText(babyage2_mon+"개월 "+babyage2_date+"일");
-            babyage3.setText(babyage3_value + "주 " + babyage3_value_remain + "일");
-            babyage4.setText(ssb);
-            NameText.setText(name);
-            current_data.setText(getTime);
-            baby_birth.setText(date2);
         }
 
 

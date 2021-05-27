@@ -118,7 +118,7 @@ public class MainActivity extends AppCompatActivity implements Frag2.OnTimePicke
             public void run(){
                 try {
                     Message ="android";
-                    client = new Socket("113.198.234.39", 55000);
+                    client = new Socket("113.198.234.49", 55000);
                     outputStream = client.getOutputStream();   // 소켓통신 outputstream선언
                     inputStream = client.getInputStream();
                     reader = new BufferedReader(new InputStreamReader(inputStream));
