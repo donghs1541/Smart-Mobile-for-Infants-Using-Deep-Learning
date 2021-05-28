@@ -81,7 +81,7 @@ public class Frag2 extends Fragment {
         mWebView.setWebViewClient(new WebViewClient());
         mWebSettings = mWebView.getSettings();
         mWebSettings.setJavaScriptEnabled(true);
-        mWebView.loadUrl("http://113.198.234.49:57575"); // 주소를 바꿔야함()
+        mWebView.loadUrl("http://113.198.234.39:57575"); // 주소를 바꿔야함()
 
 
 

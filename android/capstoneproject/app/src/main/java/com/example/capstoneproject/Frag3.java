@@ -56,17 +56,11 @@ public class Frag3 extends Fragment {
     mainAdapter = new MainAdapter(arrayList);
     recyclerView.setAdapter(mainAdapter);
 
-        Button btn_add = (Button)view.findViewById(R.id.btn_add);
-        btn_add.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                MainData mainData = new MainData(R.drawable.alram_icon,"응애응애","시간");
-                arrayList.add(mainData);
-                mainAdapter.notifyDataSetChanged();
 
-                // onclickListener빼고 자동으로 갱신되게 해야됨. DB에 저장된 currentTime 불러와서 Listadd해야됨
-            }
-       });
+
+    final Frag3.JsonParse jsonParse = new Frag3.JsonParse();      // AsyncTask 생성
+    jsonParse.execute("http://113.198.234.39:7776/info_load_noti.php");     // 이름과 생일을 db에서 불러오는 부분
+
 
     return view;
 
@@ -126,12 +120,30 @@ public class Frag3 extends Fragment {
 
         protected void onPostExecute(String value){
             super.onPostExecute(value);
-            System.out.println("ㅁㄴㅇ");
+            String[] temp = value.split("&");
+            System.out.println("value:"+value);
+            System.out.println("temp:"+temp[0]);
+            System.out.println("temp1:"+temp[3]);
+
+            for(int i = 0; i < temp.length; i++) {
+                MainData mainData = new MainData(R.drawable.alram_icon,"Emergency!",temp[i]);
+                arrayList.add(mainData);
+                mainAdapter.notifyDataSetChanged();
+            }
+
+
+
+
+            }
+
+
+
+
             }
 
 
         }
 
 
-    }
-}
+
+

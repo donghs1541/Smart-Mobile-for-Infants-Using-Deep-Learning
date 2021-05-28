@@ -150,7 +150,7 @@ public class Frag1 extends Fragment {
             currentTime = simpleDate.format(mDate); //DB에 저장할 알람 string
 
             final Frag1.JsonParse jsonParse = new Frag1.JsonParse();      // AsyncTask 생성
-            jsonParse.execute("http://113.198.234.49:7776/info_noti.php");     // 이름과 생일을 db에서 불러오는 부분
+            jsonParse.execute("http://113.198.234.39:7776/info_noti.php");     // 이름과 생일을 db에서 불러오는 부분
 
 
     }
@@ -188,7 +188,7 @@ public class Frag1 extends Fragment {
 
 
         final Frag1.JsonParse jsonParse = new Frag1.JsonParse();      // AsyncTask 생성
-        jsonParse.execute("http://113.198.234.49:7776/info_load_birthday.php");     // 이름과 생일을 db에서 불러오는 부분
+        jsonParse.execute("http://113.198.234.39:7776/info_load_birthday.php");     // 이름과 생일을 db에서 불러오는 부분
 
     return view;
 
@@ -266,7 +266,7 @@ public class Frag1 extends Fragment {
             url = strings[0];
             try {
                 switch (url){
-                    case ("http://113.198.234.49:7776/info_load_birthday.php"):
+                    case ("http://113.198.234.39:7776/info_load_birthday.php"):
                         serverURL = new URL(url);
                         httpURLConnection = (HttpURLConnection) serverURL.openConnection();
 
@@ -275,7 +275,7 @@ public class Frag1 extends Fragment {
                         httpURLConnection.setRequestMethod("POST");
                         httpURLConnection.connect();
                         break;
-                    case ("http://113.198.234.49:7776/info_noti.php"):
+                    case ("http://113.198.234.39:7776/info_noti.php"):
                         String selectData = "Data=" + currentTime;
                         // 따옴표 안과 php의 post [ ] 안이 이름이 같아야 함
 
@@ -330,7 +330,7 @@ public class Frag1 extends Fragment {
         protected void onPostExecute(String value){
             super.onPostExecute(value);
             switch (url){
-                case ("http://113.198.234.49:7776/info_load_birthday.php"):
+                case ("http://113.198.234.39:7776/info_load_birthday.php"):
                     String[] temp = value.split(" ");
                     date2 = temp[0]; // 날짜(생일)
                     String name = temp[1]; //이름
@@ -393,7 +393,7 @@ public class Frag1 extends Fragment {
                     baby_birth.setText(date2);
                     break;
 
-                case ("http://113.198.234.49:7776/info_noti.php"):
+                case ("http://113.198.234.39:7776/info_noti.php"):
 
                     break;
 
