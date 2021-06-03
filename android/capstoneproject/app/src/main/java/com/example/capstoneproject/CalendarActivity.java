@@ -50,7 +50,7 @@ public class CalendarActivity extends AppCompatActivity {
             public void onClick(View v) {
                 if (date !="") {
                     final CalendarActivity.JsonParse jsonParse = new CalendarActivity.JsonParse();      // AsyncTask 생성
-                    jsonParse.execute("http://113.198.234.49:7776/update_birthday.php");     // AsyncTask 실행
+                    jsonParse.execute("http://1.254.233.144:7776/update_birthday.php");     // AsyncTask 실행
                     Toast.makeText(CalendarActivity.this, "생일 변경 완료", Toast.LENGTH_SHORT).show();
 
                 }

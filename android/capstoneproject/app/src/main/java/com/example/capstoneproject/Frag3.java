@@ -59,7 +59,7 @@ public class Frag3 extends Fragment {
 
 
     final Frag3.JsonParse jsonParse = new Frag3.JsonParse();      // AsyncTask 생성
-    jsonParse.execute("http://113.198.234.39:7776/info_load_noti.php");     // 이름과 생일을 db에서 불러오는 부분
+    jsonParse.execute("http://1.254.233.144:7776/info_load_noti.php");     // 이름과 생일을 db에서 불러오는 부분
 
 
     return view;
