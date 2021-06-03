@@ -55,13 +55,13 @@ public class ProfileName extends AppCompatActivity {
 
 
         final JsonParse jsonParse = new JsonParse();      // AsyncTask 생성
-        jsonParse.execute("http://113.198.234.39:7776/info_load_name.php");     // AsyncTask 실행
+        jsonParse.execute("http://1.254.233.144:7776/info_load_name.php");     // AsyncTask 실행
 
         ChangeButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 final JsonParse jsonParse = new JsonParse();      // AsyncTask 생성
-                jsonParse.execute("http://113.198.234.39:7776/info_insert.php");     // AsyncTask 실행
+                jsonParse.execute("http://1.254.233.144:7776/info_insert.php");     // AsyncTask 실행
 
                 Toast.makeText(ProfileName.this, "이름 변경 완료", Toast.LENGTH_SHORT).show();
             }
