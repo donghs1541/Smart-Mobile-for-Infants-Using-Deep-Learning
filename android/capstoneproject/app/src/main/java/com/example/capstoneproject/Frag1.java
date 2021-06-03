@@ -379,7 +379,8 @@ public class Frag1 extends Fragment {
 
                     //Textview 부분 색깔 강조
                     SpannableStringBuilder ssb = new SpannableStringBuilder(str);
-                    ssb.setSpan(new ForegroundColorSpan(Color.parseColor("#01AFF1")), 0, 3, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
+
+                    ssb.setSpan(new ForegroundColorSpan(Color.parseColor("#01AFF1")), 0, str.length(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
 
 
 

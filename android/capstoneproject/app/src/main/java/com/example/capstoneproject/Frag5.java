@@ -47,7 +47,6 @@ public class Frag5 extends PreferenceActivity {
         if(key.equals("name_change")){
             // do your work
             startActivity(new Intent(getApplicationContext(),ProfileName.class));
-
             return true;
         }
         else if(key.equals("birth_change")){
