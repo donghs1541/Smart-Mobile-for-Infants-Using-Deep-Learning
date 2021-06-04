@@ -7,7 +7,7 @@
         <PreferenceScreen
             android:key="name_change"
             android:title="이름"
-            android:summary="응애">
+            android:summary="이름을 설정하세요">
         </PreferenceScreen>
 
 
@@ -17,7 +17,7 @@
         <PreferenceScreen
             android:key="birth_change"
             android:title="생일 설정"
-            android:summary="2021.05.25">
+            android:summary="생일을 설정하세요">
         </PreferenceScreen>
 
     </PreferenceCategory>
