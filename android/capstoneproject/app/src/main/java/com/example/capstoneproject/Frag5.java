@@ -3,6 +3,7 @@ package com.example.capstoneproject;
 import android.annotation.SuppressLint;
 import android.app.FragmentTransaction;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.preference.Preference;
 import android.preference.PreferenceActivity;
@@ -40,6 +41,8 @@ public class Frag5 extends PreferenceActivity {
 
         // Load the preferences from an XML resource
         addPreferencesFromResource(R.xml.preferences);
+
+
     }
     @Override
     public boolean onPreferenceTreeClick(PreferenceScreen preferenceScreen, Preference preference) {
@@ -47,6 +50,9 @@ public class Frag5 extends PreferenceActivity {
         if(key.equals("name_change")){
             // do your work
             startActivity(new Intent(getApplicationContext(),ProfileName.class));
+
+            Intent secondIntent = getIntent();
+            String message = secondIntent.getStringExtra("str");
             return true;
         }
         else if(key.equals("birth_change")){

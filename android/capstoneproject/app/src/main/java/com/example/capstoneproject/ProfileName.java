@@ -42,6 +42,7 @@ public class ProfileName extends AppCompatActivity {
     private String jsonString;
     private Frag1 frag1;
 
+    String str_temp;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -62,8 +63,9 @@ public class ProfileName extends AppCompatActivity {
             public void onClick(View v) {
                 final JsonParse jsonParse = new JsonParse();      // AsyncTask 생성
                 jsonParse.execute("http://1.254.233.144:7776/info_insert.php");     // AsyncTask 실행
-
                 Toast.makeText(ProfileName.this, "이름 변경 완료", Toast.LENGTH_SHORT).show();
+                Intent myIntent = new Intent(ProfileName.this, Frag5.class);
+                myIntent.putExtra("str", str_temp);
             }
         });
     }
@@ -114,7 +116,7 @@ public class ProfileName extends AppCompatActivity {
                 bufferedReader.close();
                 CurrentName.setText(sb.toString().trim());
                 Log.d(TAG, sb.toString().trim());
-
+                str_temp = sb.toString().trim();
                 return sb.toString().trim();        // 받아온 JSON 의 공백을 제거
             } catch (Exception e) {
                 Log.d(TAG, "InsertData: Error ", e);
