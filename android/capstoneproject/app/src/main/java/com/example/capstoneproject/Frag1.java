@@ -74,6 +74,7 @@ public class Frag1 extends Fragment {
         temp_dust = SenSorValue.split(" ")[2];
         face_detection_value = SenSorValue.split(" ")[3];
 
+
         // 미세먼지 센서 값 나누기
        if (Float.parseFloat(temp_dust) <= 30.0)
            dust_contition = "good";
@@ -137,10 +138,18 @@ public class Frag1 extends Fragment {
             }
         }).start();
 
-        if(face_detection_value == "person")
-            System.out.println("asdfasdfasdfasdfasdfgewqewtwqqww");
-            displayNotification();
 
+
+        switch (face_detection_value) {
+            case "person":
+                displayNotification();
+                break;
+            case "face":
+                displayNotification();
+                break;
+            default:
+                break;
+        }
             long now = System.currentTimeMillis();
             Date mDate = new Date(now);
             SimpleDateFormat simpleDate = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
