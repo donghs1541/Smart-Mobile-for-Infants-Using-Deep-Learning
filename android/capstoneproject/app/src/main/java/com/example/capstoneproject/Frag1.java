@@ -130,7 +130,7 @@ public class Frag1 extends Fragment {
                             default:
                                 dust_image.setImageResource(R.drawable.good);
                                 dust_result.setTextColor(Color.parseColor("#0100FF"));
-                                dust_result.setText("좋음");
+                                dust_result.setText("매우나쁨");
                                 break;
                         }
                     }
@@ -142,13 +142,11 @@ public class Frag1 extends Fragment {
 
         switch (face_detection_value) {
             case "person":
-                displayNotification();
                 break;
             case "face":
-                displayNotification();
                 break;
             default:
-                break;
+                displayNotification();
         }
             long now = System.currentTimeMillis();
             Date mDate = new Date(now);
