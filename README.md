@@ -9,8 +9,10 @@
     카메라 
     Pycharm(Python)
     Yolov5 // https://github.com/ultralytics/yolov5  yolov5 모델
+    
   안드로이드(앱)
     Android Studio(JAVA)
+    
   서버(컴퓨터) 
     Pycharm(Python)
     Maria DB (RDB)
