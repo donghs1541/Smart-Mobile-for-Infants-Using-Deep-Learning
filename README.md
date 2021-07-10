@@ -1,13 +1,21 @@
 # Smart-Mobile-for-Infants-Using-Deep-Learning
 딥러닝으로 애기 뒤집기 파악 
 
-구성품
-  라즈베리파이 
-    온도/습도센서 
+
+구성품 및 사용한 기술 스텍
+  라즈베리파이 (라즈비안 os)
+    온도/습도센서 (dht-22)
     미세먼지센서
-    카메라
+    카메라 
+    Pycharm(Python)
+    Yolov5 // https://github.com/ultralytics/yolov5  yolov5 모델
   안드로이드(앱)
-  서버(컴퓨터)
+    Android Studio(JAVA)
+  서버(컴퓨터) 
+    Pycharm(Python)
+    Maria DB (RDB)
+    PHP (Web Streaming)
+    
   
 ![first_icon](https://user-images.githubusercontent.com/68945145/116649473-47e2f700-a9ba-11eb-94b0-ddfc351e02aa.png)
 
