@@ -3,19 +3,29 @@
 
 
 구성품 및 사용한 기술 스텍
+
   라즈베리파이 (라즈비안 os)
+  
     온도/습도센서 (dht-22)
+    
     미세먼지센서
+    
     카메라 
+    
     Pycharm(Python)
+    
     Yolov5 // https://github.com/ultralytics/yolov5  yolov5 모델
     
   안드로이드(앱)
+  
     Android Studio(JAVA)
     
   서버(컴퓨터) 
+  
     Pycharm(Python)
+    
     Maria DB (RDB)
+    
     PHP (Web Streaming)
     
   
